@@ -56,7 +56,7 @@ public class BlockRenderer {
 		if (light) {
 			/* LIGHT */
 			g.setColor(ColorUtil.colorLerp(color, 0xffffff));
-			g.drawLine((int)point.getX(), (int)point.getY()+font.getHeight()-corners,
+			g.drawLine((int)point.getX(), (int)point.getY()+font.getHeight(),
 					(int)point.getX(), (int)point.getY()+corners);
 			g.drawLine((int)point.getX(), (int)point.getY()+corners,
 					(int)point.getX()+corners, (int)point.getY());
@@ -65,7 +65,7 @@ public class BlockRenderer {
 			g.drawLine((int)point.getX()+corners+space+jigsawspace, (int)point.getY()+corners,
 					(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY());
 			g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY(),
-					(int)point.getX()+(corners*2)+font.stringWidth(label), (int)point.getY());
+					(int)point.getX()+(corners*3)+font.stringWidth(label)-1, (int)point.getY());
 			/* SHADOW */
 			g.setColor(ColorUtil.colorLerp(color, ColorUtil.colorLerp(color, 0)));
 			g.drawLine((int)point.getX()+corners, (int)point.getY()+font.getHeight()+corners-1,
@@ -75,7 +75,13 @@ public class BlockRenderer {
 			g.drawLine((int)point.getX()+(corners*2)+space-1, (int)point.getY()+font.getHeight()+(corners*2)-1,
 					(int)point.getX()+corners+space+jigsawspace-1, (int)point.getY()+font.getHeight()+(corners*2)-1);
 			g.drawLine((int)point.getX()+corners+space+jigsawspace-1, (int)point.getY()+font.getHeight()+(corners*2)-1,
-					(int)point.getX()+corners+space+jigsawspace-1, (int)point.getY()+font.getHeight()+(corners*2)-1);
+					(int)point.getX()+(corners*2)+space+jigsawspace-1, (int)point.getY()+font.getHeight()+corners-1);
+			g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace-1, (int)point.getY()+font.getHeight()+corners-1,
+					(int)point.getX()+(corners*3)+font.stringWidth(label)-1, (int)point.getY()+font.getHeight()+corners-1);
+			g.drawLine((int)point.getX()+(corners*3)+font.stringWidth(label)-1, (int)point.getY()+font.getHeight()+corners-1,
+					(int)point.getX()+(corners*4)+font.stringWidth(label)-1, (int)point.getY()+font.getHeight());
+			g.drawLine((int)point.getX()+(corners*4)+font.stringWidth(label)-1, (int)point.getY()+font.getHeight(),
+					(int)point.getX()+(corners*4)+font.stringWidth(label)-1, (int)point.getY()+corners);
 		}
 	}
 }
