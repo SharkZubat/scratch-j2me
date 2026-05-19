@@ -86,6 +86,24 @@ public class BlockRenderer {
 				}
 				break;
 			}
+			case 1: {
+				/* TOP CORNERS */
+				g.fillTriangle((int)point.getX(),(int)point.getY()+(int)(corners*1.5f),
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY(),
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()+(int)(corners*1.5f));
+				g.fillTriangle((int)point.getX()+(int)(corners*3f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*1.5f),
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(),(int)point.getY(),
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*1.5f));
+				g.fillTriangle((int)point.getX(),(int)point.getY()+(int)blocksize.getY()-(int)(corners*0.75f),
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()+(int)(corners*0.75f)+(int)blocksize.getY(),
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()-(int)(corners*0.75f)+(int)blocksize.getY());
+				g.fillTriangle((int)point.getX()+(int)(corners*3f)+(int)blocksize.getX(),(int)point.getY()+(int)blocksize.getY()-(int)(corners*0.75f),
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*0.75f)+(int)blocksize.getY(),
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()-(int)(corners*0.75f)+(int)blocksize.getY());
+				/* BODY */
+				g.fillRect((int)point.getX(), (int)point.getY()+(int)(corners*1.5f), (corners*3)+(int)blocksize.getX(), (int)blocksize.getY()-(corners*2));
+				g.fillRect((int)point.getX()+(int)(corners*1.5f), (int)point.getY(), (int)blocksize.getX(), (corners*2)+(int)blocksize.getY()-corners);
+			}
 		}
 		renderargs(blockArgs, point, g);
 	}
