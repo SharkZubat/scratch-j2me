@@ -1,5 +1,6 @@
 package com.tsg.scratchjava;
 
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
@@ -38,6 +39,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	
 	private void draw() {
 		Graphics g = getGraphics();
+		Font font = Font.getDefaultFont();
 		
 		b.renderblock(0, "move (10) steps", point, 0x3061D3, g);
 		flushGraphics();

@@ -9,10 +9,10 @@ import com.tsg.scratchjava.sys.Point;
 
 public class BlockRenderer {
 	Font font = Font.getDefaultFont();
-	private float size = (font.getHeight())/15;
-	private int space = (int) (8*size);
-	private int jigsawspace = (int) (8*size);
-	private int corners = (int) (3*size);
+	private float size = font.getHeight()/15f;
+	private int space = (int) (8f*size);
+	private int jigsawspace = (int) (8f*size);
+	private int corners = (int) (3f*size);
 	private boolean light = true;
 	public void renderblock(int type, String label, Point point, int color, Graphics g) {
 		g.setColor(color);
