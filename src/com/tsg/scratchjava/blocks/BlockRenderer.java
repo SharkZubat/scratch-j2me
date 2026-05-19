@@ -116,7 +116,7 @@ public class BlockRenderer {
 			break;
 		}
 		case 1: {
-			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, 5*size, 5*size);
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(5*size), (int)(5*size));
 			g.setColor(0);
 			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
