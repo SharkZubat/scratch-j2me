@@ -9,6 +9,7 @@ public class BlockArg {
 	 * type 2 - string input
 	 * type 3 - dropdown
 	 * type 4 - variable/list dropdown
+	 * type 5 - sub-block
 	 */
 	
 	private int type;
@@ -33,6 +34,9 @@ public class BlockArg {
 		switch (blockarg.getType()) {
 		case 0: {
 			return font.stringWidth((String)blockarg.getObjectArray()[0]);
+		}
+		case 1: {
+			return font.stringWidth((String)blockarg.getObjectArray()[0])+4;
 		}
 		}
 		return 0;

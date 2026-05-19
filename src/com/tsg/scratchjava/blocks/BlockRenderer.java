@@ -15,7 +15,7 @@ public class BlockRenderer {
 	private static int corners = (int) (3f*size);
 	private static boolean light = true;
 	public static void renderblock(int type, BlockArg[] blockArgs, Point point, int color, Graphics g) {
-		Point blocksize = new Point(getWidth(blockArgs)-corners, 15);
+		Point blocksize = new Point(getWidth(blockArgs)-corners, font.getHeight());
 		g.setColor(color);
 		switch (type) {
 			case 0: {
@@ -110,7 +110,18 @@ public class BlockRenderer {
 
 	public static void renderblockarg(Point point, BlockArg blockarg, Graphics g) {
 		g.setColor(0xffffff);
-		g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+		switch (blockarg.getType()) {
+		case 0: {
+			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			break;
+		}
+		case 1: {
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, 5, 5);
+			g.setColor(0);
+			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			break;
+		}
+		}
 		System.out.println("successfully rendered argument (value display): " + (String) blockarg.getObjectArray()[0]);
 	}
 }
