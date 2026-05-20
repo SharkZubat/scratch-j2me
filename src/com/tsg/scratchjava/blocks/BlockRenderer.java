@@ -94,15 +94,35 @@ public class BlockRenderer {
 				g.fillTriangle((int)point.getX()+(int)(corners*3f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*1.5f),
 						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(),(int)point.getY(),
 						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*1.5f));
-				g.fillTriangle((int)point.getX(),(int)point.getY()+(int)blocksize.getY()-(int)(corners*0.75f),
-						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()+(int)(corners*0.75f)+(int)blocksize.getY(),
-						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()-(int)(corners*0.75f)+(int)blocksize.getY());
-				g.fillTriangle((int)point.getX()+(int)(corners*3f)+(int)blocksize.getX(),(int)point.getY()+(int)blocksize.getY()-(int)(corners*0.75f),
-						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()+(int)(corners*0.75f)+(int)blocksize.getY(),
-						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()-(int)(corners*0.75f)+(int)blocksize.getY());
+				/* BOTTOM CORNERS */
+				g.fillTriangle((int)point.getX(),(int)point.getY()+(int)blocksize.getY()-corners/2,
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()+corners+(int)blocksize.getY(),
+						(int)point.getX()+(int)(corners*1.5f), (int)point.getY()-corners/2+(int)blocksize.getY());
+				g.fillTriangle((int)point.getX()+(int)(corners*3f)+(int)blocksize.getX(),(int)point.getY()+(int)blocksize.getY()-corners/2,
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()+corners+(int)blocksize.getY(),
+						(int)point.getX()+(int)(corners*1.5f)+(int)blocksize.getX(), (int)point.getY()-corners/2+(int)blocksize.getY());
 				/* BODY */
-				g.fillRect((int)point.getX(), (int)point.getY()+(int)(corners*1.5f), (corners*3)+(int)blocksize.getX(), (int)blocksize.getY()-(corners*2));
+				g.fillRect((int)point.getX(), (int)point.getY()+(int)(corners*1.5f), (corners*3)+(int)blocksize.getX(), 
+						((int)point.getY()+(int)blocksize.getY()-corners/2)-((int)point.getY()+(int)(corners*1.5f)));
 				g.fillRect((int)point.getX()+(int)(corners*1.5f), (int)point.getY(), (int)blocksize.getX(), (corners*2)+(int)blocksize.getY()-corners);
+				if (light) {
+					/* LIGHT */
+					g.setColor(ColorUtil.colorLerp(color, 0xffffff));
+					g.drawLine((int)point.getX(), (int)point.getY()-1+(int)blocksize.getY()-corners/2,
+							(int)point.getX(), (int)point.getY()+(int)(corners*1.5f));
+					g.drawLine((int)point.getX(), (int)point.getY()+(int)(corners*1.5f),
+							(int)point.getX()+(int)(corners*1.5f), (int)point.getY());
+					g.drawLine((int)point.getX()+(int)(corners*1.5f), (int)point.getY(),
+							(int)point.getX()+(int)blocksize.getX()+corners, (int)point.getY());
+					/* SHADOW */
+					g.setColor(ColorUtil.colorLerp(color, ColorUtil.colorLerp(color, 0)));
+					g.drawLine((int)point.getX()+(int)(corners*1.5f), (int)point.getY()-1+(int)blocksize.getY()-corners/2+(int)(corners*1.5f),
+							(int)point.getX()+(int)blocksize.getX()+corners, (int)point.getY()-1+(int)blocksize.getY()-corners/2+(int)(corners*1.5f));
+					g.drawLine((int)point.getX()+(int)blocksize.getX()+corners, (int)point.getY()-1+(int)blocksize.getY()-corners/2+(int)(corners*1.5f),
+							(int)point.getX()+(int)blocksize.getX()+(corners*3), (int)point.getY()-1+(int)blocksize.getY()-corners/2);
+					g.drawLine((int)point.getX()+(int)blocksize.getX()+(corners*3), (int)point.getY()-1+(int)blocksize.getY()-corners/2,
+							(int)point.getX()+(int)blocksize.getX()+(corners*3), (int)point.getY()+(int)(corners*1.5f)+1);
+				}
 			}
 		}
 		renderargs(blockArgs, point, g);
