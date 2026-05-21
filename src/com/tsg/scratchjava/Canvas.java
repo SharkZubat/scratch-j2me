@@ -39,7 +39,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	private void draw() {
 		Graphics g = getGraphics();
 		
-		BlockRenderer.renderblock(1, new BlockArg[] {
+		BlockRenderer.renderblock(2, new BlockArg[] {
 			    new BlockArg(0, new Object[]{"move"}),
 			    new BlockArg(1, new Object[]{"10"}),
 			    new BlockArg(0, new Object[]{"steps"})

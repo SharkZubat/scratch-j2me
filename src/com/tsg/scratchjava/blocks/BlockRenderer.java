@@ -123,6 +123,41 @@ public class BlockRenderer {
 					g.drawLine((int)point.getX()+(int)blocksize.getX()+(corners*3), (int)point.getY()-1+(int)blocksize.getY()-corners/2,
 							(int)point.getX()+(int)blocksize.getX()+(corners*3), (int)point.getY()+(int)(corners*1.5f)+1);
 				}
+				break;
+			}
+			case 2: {
+				/* LEFT EDGE */
+				g.fillTriangle((int)point.getX()+(int)Math.ceil(blocksize.getY()/2),(int)point.getY(),
+						(int)point.getX(), (int)point.getY()+(int)Math.floor(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1,
+						(int)point.getX()+(int)Math.ceil(blocksize.getY()/2), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners);
+				g.fillTriangle((int)point.getX()+(int)Math.ceil(blocksize.getY()/2),(int)point.getY(),
+						(int)point.getX(), (int)point.getY()+(int)+Math.ceil(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1,
+						(int)point.getX()+(int)Math.ceil(blocksize.getY()/2), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners);
+				/* RIGHT EDGE */
+				g.fillTriangle((int)point.getX()+(int)Math.ceil(blocksize.getY()/2)+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(),(int)point.getY(),
+						(int)point.getX()+(int)blocksize.getX()+(corners*4)+1, (int)point.getY()+(int)Math.floor(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1,
+						(int)point.getX()+(int)Math.ceil(blocksize.getY()/2)-1+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners);
+				g.fillTriangle((int)point.getX()+(int)Math.ceil(blocksize.getY()/2)+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(),(int)point.getY(),
+						(int)point.getX()+(int)blocksize.getX()+(corners*4)+1, (int)point.getY()+(int)+Math.ceil(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1,
+						(int)point.getX()+(int)Math.ceil(blocksize.getY()/2)-1+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners);
+				/* BODY */
+				g.fillRect((int)point.getX()+(int)Math.ceil(blocksize.getY()/2), (int)point.getY(), (int)blocksize.getX()+(corners*4)-(int)blocksize.getY(), (corners*2)+(int)blocksize.getY()-corners);
+				
+				if (light) {
+					/* LIGHT */
+					g.setColor(ColorUtil.colorLerp(color, 0xffffff));
+					g.drawLine((int)point.getX(), (int)point.getY()+(int)Math.floor(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1,
+							(int)point.getX()+(int)Math.ceil(blocksize.getY()/2),(int)point.getY());
+					g.drawLine((int)point.getX()+(int)Math.ceil(blocksize.getY()/2),(int)point.getY(),
+							(int)point.getX()+(int)Math.ceil(blocksize.getY()/2)-1+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(),(int)point.getY());
+					/* SHADOW */
+					g.setColor(ColorUtil.colorLerp(color, ColorUtil.colorLerp(color, 0)));
+					g.drawLine((int)point.getX()+1+(int)Math.ceil(blocksize.getY()/2), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners,
+							(int)point.getX()+(int)Math.ceil(blocksize.getY()/2)-1+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners);
+					g.drawLine((int)point.getX()+(int)Math.ceil(blocksize.getY()/2)-1+(int)blocksize.getX()+(corners*4)-(int)blocksize.getY(), (int)point.getY()+(corners*2)+(int)blocksize.getY()-corners,
+							(int)point.getX()+(int)blocksize.getX()+(corners*4)+1, (int)point.getY()+(int)+Math.ceil(((corners*2)+(blocksize.getY()-corners)+0.001)/2)-1);
+				}
+				break;
 			}
 		}
 		renderargs(blockArgs, point, g);
@@ -155,6 +190,8 @@ public class BlockRenderer {
 		}
 		case 1: {
 			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(5*size), (int)(5*size));
+			g.setColor(0xAAAAAA);
+			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(5*size), (int)(5*size));
 			g.setColor(0);
 			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
