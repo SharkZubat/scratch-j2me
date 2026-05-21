@@ -196,6 +196,14 @@ public class BlockRenderer {
 			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
 		}
+		case 2: {
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(10*size), (int)(10*size));
+			g.setColor(0xAAAAAA);
+			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(10*size), (int)(10*size));
+			g.setColor(0);
+			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			break;
+		}
 		}
 		System.out.println("successfully rendered argument (value display): " + (String) blockarg.getObjectArray()[0]);
 	}

@@ -39,9 +39,11 @@ public class Canvas extends GameCanvas implements Runnable {
 	private void draw() {
 		Graphics g = getGraphics();
 		
-		BlockRenderer.renderblock(2, new BlockArg[] {
+		BlockRenderer.renderblock(0, new BlockArg[] {
 			    new BlockArg(0, new Object[]{"move"}),
 			    new BlockArg(1, new Object[]{"10"}),
+			    new BlockArg(0, new Object[]{", and"}),
+			    new BlockArg(2, new Object[]{"hello"}),
 			    new BlockArg(0, new Object[]{"steps"})
 			}, point, 0x3061D3, g);
 		flushGraphics();
