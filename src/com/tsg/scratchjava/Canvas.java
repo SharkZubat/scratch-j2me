@@ -30,21 +30,30 @@ public class Canvas extends GameCanvas implements Runnable {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated methosd stub
 		while (isRunning) {
 			draw();
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	private void draw() {
 		Graphics g = getGraphics();
 		
-		BlockRenderer.renderblock(0, new BlockArg[] {
-			    new BlockArg(0, new Object[]{"move"}),
+		g.setColor(0xf0f0f0);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		BlockRenderer.renderblock(3, new BlockArg[] {
+			    new BlockArg(0, new Object[]{"label"}),
 			    new BlockArg(1, new Object[]{"10"}),
-			    new BlockArg(0, new Object[]{", and"}),
 			    new BlockArg(2, new Object[]{"hello"}),
-			    new BlockArg(0, new Object[]{"steps"})
+			    new BlockArg(3, new Object[]{"dropdown"}),
+			    new BlockArg(4, new Object[]{null})
 			}, point, 0x3061D3, g);
 		flushGraphics();
 	}
