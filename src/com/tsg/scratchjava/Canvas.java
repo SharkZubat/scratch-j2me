@@ -1,18 +1,21 @@
 package com.tsg.scratchjava;
 
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 
 import com.tsg.scratchjava.blocks.BlockArg;
 import com.tsg.scratchjava.blocks.BlockRenderer;
 import com.tsg.scratchjava.sys.Point;
 import com.tsg.scratchjava.sys.Sys;
+import com.tsg.scratchjava.sys.SysLoader;
 
 public class Canvas extends GameCanvas implements Runnable {
 
 	private boolean isRunning;
 	private Thread gameThread;
 	private Point point = new Point(0,0);
+	public Image[] loadedImages;
 
 	public Canvas() {
 		super(true);
@@ -21,6 +24,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	}
 	
 	public void start() {
+		new SysLoader();
 		isRunning = true;
         gameThread = new Thread(this);
 		gameThread.start();
@@ -66,7 +70,7 @@ public class Canvas extends GameCanvas implements Runnable {
 			    new BlockArg(9, new Object[]{null}),
 			    new BlockArg(10, new Object[]{null}),
 			    new BlockArg(11, new Object[]{null})
-			}, point, 0x3061D3, g);
+			}, point, 0x3061D3, loadedImages, g);
 		
 		flushGraphics();
 	}

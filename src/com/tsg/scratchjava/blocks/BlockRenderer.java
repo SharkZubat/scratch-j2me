@@ -13,13 +13,13 @@ import com.tsg.scratchjava.sys.Point;
 public class BlockRenderer {
 	static Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
 	static Font boldFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
-	private static float size = font.getHeight()/15f;
+	private static float size = Math.min((font.getHeight()/15f), 2);
 	private static int space = (int) (8f*size);
 	private static int jigsawspace = (int) (8f*size);
 	private static int corners = (int) (3f*size);
 	private static boolean light = true;
 	private static int colorset = 0;
-	public static void renderblock(int type, BlockArg[] blockArgs, Point point, int color, Graphics g) {
+	public static void renderblock(int type, BlockArg[] blockArgs, Point point, int color, Image[] loadedImages, Graphics g) {
 		Point blocksize = new Point(getWidth(blockArgs)-corners, font.getHeight());
 		colorset = color;
 		g.setColor(color);
@@ -231,14 +231,14 @@ public class BlockRenderer {
 				break;
 			}
 		}
-		renderargs(blockArgs, point, g);
+		renderargs(blockArgs, point, loadedImages, g);
 	}
 	
-	private static void renderargs(BlockArg[] blockArgs, Point point, Graphics g) {
+	private static void renderargs(BlockArg[] blockArgs, Point point, Image[] loadedImages, Graphics g) {
 		// TODO Auto-generated method stub
 		int width = 0;
 		for (int i = 0; i < blockArgs.length; i++) {
-			renderblockarg(new Point(point.getX()+width, point.getY()), blockArgs[i], g);
+			renderblockarg(new Point(point.getX()+width, point.getY()), blockArgs[i], loadedImages, g);
 			width += BlockArg.getWidth(blockArgs[i], size) + corners;
 		}
 	}
@@ -252,7 +252,7 @@ public class BlockRenderer {
 		return width;
 	}
 
-	public static void renderblockarg(Point point, BlockArg blockarg, Graphics g) {
+	public static void renderblockarg(Point point, BlockArg blockarg, Image[] loadedImages, Graphics g) {
 		g.setColor(0xffffff);
 		Object argset = blockarg.getObjectArray()[0];
 		if (argset == null) {
@@ -339,47 +339,19 @@ public class BlockRenderer {
 			break;
 		}
 		case 7: {
-			Image greenflag = null;
-			try {
-				greenflag = Image.createImage("/res/img/greenflag-16.png");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			g.drawImage(loadedImages[1], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		case 8: {
-			Image greenflag = null;
-			try {
-				greenflag = Image.createImage("/res/img/stop-16.png");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			g.drawImage(loadedImages[2], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		case 9: {
-			Image greenflag = null;
-			try {
-				greenflag = Image.createImage("/res/img/clockwise-16.png");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			g.drawImage(loadedImages[3], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		case 10: {
-			Image greenflag = null;
-			try {
-				greenflag = Image.createImage("/res/img/cc-16.png");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			g.drawImage(loadedImages[4], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		}
