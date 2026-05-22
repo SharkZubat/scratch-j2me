@@ -30,7 +30,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	}
 
 	public void run() {
-		// TODO Auto-generated methosd stub
+		// TODO Auto-generated method stub
 		while (isRunning) {
 			draw();
 			try {
@@ -53,8 +53,18 @@ public class Canvas extends GameCanvas implements Runnable {
 			    new BlockArg(1, new Object[]{"10"}),
 			    new BlockArg(2, new Object[]{"hello"}),
 			    new BlockArg(3, new Object[]{"dropdown"}),
-			    new BlockArg(4, new Object[]{null})
+			    new BlockArg(4, new Object[]{null}),
+			    new BlockArg(5, new Object[]{null}),
+			    new BlockArg(6, new Object[]{null}),
+			    new BlockArg(7, new Object[]{null}),
+			    new BlockArg(8, new Object[]{null}),
+			    new BlockArg(9, new Object[]{null}),
+			    new BlockArg(10, new Object[]{null}),
+			    new BlockArg(11, new Object[]{null})
 			}, point, 0x3061D3, g);
+		
+		g.setColor(0);
+		g.drawString("Scratch j2me proto", 0, 0, 0);
 		flushGraphics();
 	}
 }

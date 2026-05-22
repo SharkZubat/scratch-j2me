@@ -52,6 +52,11 @@ public class BlockArg {
 		case 4: {
 			return (int)(20*size);
 		}
+		case 7: 
+		case 8:
+		case 9:
+		case 10:
+			return 16;
 		}
 		return 0;
 	}

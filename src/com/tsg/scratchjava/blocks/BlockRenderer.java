@@ -1,7 +1,10 @@
 package com.tsg.scratchjava.blocks;
 
+import java.io.IOException;
+
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 import com.tsg.scratchjava.sys.ColorUtil;
 import com.tsg.scratchjava.sys.Point;
@@ -328,6 +331,50 @@ public class BlockRenderer {
 				g.drawLine((int)point.getX()+(int)(14*size)+(corners*2), (int)point.getY()+(int)(12*size)+(int)(corners*1.5f),
 						(int)point.getX()+(int)(20*size)+(corners*2), (int)point.getY()+(int)(6*size)+(int)(corners*1.5f));
 			}
+			break;
+		}
+		case 7: {
+			Image greenflag = null;
+			try {
+				greenflag = Image.createImage("/res/img/greenflag-16.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			break;
+		}
+		case 8: {
+			Image greenflag = null;
+			try {
+				greenflag = Image.createImage("/res/img/stop-16.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			break;
+		}
+		case 9: {
+			Image greenflag = null;
+			try {
+				greenflag = Image.createImage("/res/img/clockwise-16.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			break;
+		}
+		case 10: {
+			Image greenflag = null;
+			try {
+				greenflag = Image.createImage("/res/img/cc-16.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			g.drawImage(greenflag, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		}
