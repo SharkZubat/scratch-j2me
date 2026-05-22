@@ -254,54 +254,59 @@ public class BlockRenderer {
 
 	public static void renderblockarg(Point point, BlockArg blockarg, Graphics g) {
 		g.setColor(0xffffff);
+		Object argset = blockarg.getObjectArray()[0];
+		if (argset == null) {
+			argset = "";
+		}
 		switch (blockarg.getType()) {
 		case 0: {
 			g.setFont(boldFont);
-			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
+			g.drawString((String) argset, (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
 		case 1: {
 			g.setFont(font);
-			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(10*size), (int)(10*size));
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) argset)+4, font.getHeight()-corners, (int)(10*size), (int)(10*size));
 			g.setColor(0xAAAAAA);
-			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners-1, (int)(10*size), (int)(10*size));
+			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) argset)+4, font.getHeight()-corners-1, (int)(10*size), (int)(10*size));
 			g.setColor(0);
-			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			g.drawString((String) argset, (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
 		}
 		case 2: {
 			g.setFont(font);
-			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners, (int)(5*size), (int)(5*size));
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) argset)+4, font.getHeight()-corners, (int)(5*size), (int)(5*size));
 			g.setColor(0xAAAAAA);
-			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) blockarg.getObjectArray()[0])+4, font.getHeight()-corners-1, (int)(5*size), (int)(5*size));
+			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), font.stringWidth((String) argset)+4, font.getHeight()-corners-1, (int)(5*size), (int)(5*size));
 			g.setColor(0);
-			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			g.drawString((String) argset, (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
 		}
+		case 5:
 		case 3: {
 			g.setFont(font);
 			g.setColor(ColorUtil.colorLerp(colorset, ColorUtil.colorLerp(colorset, 0)));
-			g.fillRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), (int)Math.ceil(10*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)(12*size));
+			g.fillRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), (int)Math.ceil(10*size)+font.stringWidth((String) argset), (int)(12*size));
 			g.setColor(0);
-			g.fillTriangle((int)point.getX()+(corners*2)+(int)(2*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size),
-					(int)point.getX()+(corners*2)+(int)(5*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f)+(int)(8*size),
-					(int)point.getX()+(corners*2)+(int)(8*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size));
+			g.fillTriangle((int)point.getX()+(corners*2)+(int)(2*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size),
+					(int)point.getX()+(corners*2)+(int)(5*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(8*size),
+					(int)point.getX()+(corners*2)+(int)(8*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size));
 			if (light) {
 				/* HIGHLIGHT */
 				g.setColor(ColorUtil.colorLerp(colorset, 0));
 				g.drawLine((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size),
 						(int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f));
 				g.drawLine((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f),
-						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f));
+						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f));
 				/* SHADOW */
 				g.setColor(ColorUtil.colorLerp(colorset, 0xffffff));
 				g.drawLine((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size),
-						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size));
-				g.drawLine((int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size),
-						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) blockarg.getObjectArray()[0]), (int)point.getY()+(int)(corners*1.5f));
+						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size));
+				g.drawLine((int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(12*size),
+						(int)point.getX()+(corners*2)+(int)(10*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f));
 			}
 			g.setColor(0xffffff);
-			g.drawString((String) blockarg.getObjectArray()[0], (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			g.drawString((String) argset, (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
 			break;
 		}
 		case 4: {
@@ -378,6 +383,6 @@ public class BlockRenderer {
 			break;
 		}
 		}
-		System.out.println("successfully rendered argument (value display): " + (String) blockarg.getObjectArray()[0]);
+		System.out.println("successfully rendered argument (value display): " + (String) argset);
 	}
 }

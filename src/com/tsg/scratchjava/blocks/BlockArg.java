@@ -46,8 +46,13 @@ public class BlockArg {
 		case 2: {
 			return font.stringWidth((String)blockarg.getObjectArray()[0])+(int)(4*size);
 		}
+		case 5:
 		case 3: {
-			return font.stringWidth((String)blockarg.getObjectArray()[0])+(int)(10*size);
+			try {
+				return font.stringWidth((String)blockarg.getObjectArray()[0])+(int)(10*size);
+			} catch (NullPointerException e) {
+				return (int)(10*size);
+			}
 		}
 		case 4: {
 			return (int)(20*size);
