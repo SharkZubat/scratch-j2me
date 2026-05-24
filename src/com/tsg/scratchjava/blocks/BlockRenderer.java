@@ -68,7 +68,9 @@ public class BlockRenderer {
 					g.drawLine((int)point.getX(), (int)point.getY()+corners,
 							(int)point.getX()+corners, (int)point.getY());
 					g.drawLine((int)point.getX()+corners, (int)point.getY(),
-							(int)point.getX()+corners+space, (int)point.getY());
+							(int)point.getX()+corners+space-1, (int)point.getY());
+					g.drawLine((int)point.getX()+(corners*2)+space-1, (int)point.getY()+corners,
+							(int)point.getX()+corners+space+jigsawspace, (int)point.getY()+corners);
 					g.drawLine((int)point.getX()+corners+space+jigsawspace+1, (int)point.getY()+corners-1,
 							(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY());
 					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY(),
@@ -83,7 +85,7 @@ public class BlockRenderer {
 							(int)point.getX()+corners+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+(corners*2)-1);
 					g.drawLine((int)point.getX()+corners+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+(corners*2)-1,
 							(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+corners-1);
-					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace-1, (int)point.getY()+(int)blocksize.getY()+corners-1,
+					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+corners-1,
 							(int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1);
 					g.drawLine((int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1,
 							(int)point.getX()+(corners*4)+(int)blocksize.getX()-1, (int)point.getY()+(int)blocksize.getY());
@@ -221,7 +223,62 @@ public class BlockRenderer {
 							(int)point.getX()+corners+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+(corners*2)-1);
 					g.drawLine((int)point.getX()+corners+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+(corners*2)-1,
 							(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+corners-1);
-					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace-1, (int)point.getY()+(int)blocksize.getY()+corners-1,
+					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY()+(int)blocksize.getY()+corners-1,
+							(int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1);
+					g.drawLine((int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1,
+							(int)point.getX()+(corners*4)+(int)blocksize.getX()-1, (int)point.getY()+(int)blocksize.getY());
+					g.drawLine((int)point.getX()+(corners*4)+(int)blocksize.getX()-1, (int)point.getY()+(int)blocksize.getY(),
+							(int)point.getX()+(corners*4)+(int)blocksize.getX()-1, (int)point.getY()+corners);
+				}
+				break;
+			}
+			case 4: {
+				/* TOP CORNERS */
+				g.fillTriangle((int)point.getX(),(int)point.getY()+corners,
+						(int)point.getX()+corners, (int)point.getY(),
+						(int)point.getX()+corners, (int)point.getY()+corners);
+				g.fillTriangle((int)point.getX()+corners+space,(int)point.getY(),
+						(int)point.getX()+(corners*2)+space, (int)point.getY()+corners,
+						(int)point.getX()+corners+space, (int)point.getY()+corners);
+				g.fillTriangle((int)point.getX()+corners+space+jigsawspace,(int)point.getY()+corners,
+						(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY(),
+						(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY()+corners);
+				g.fillTriangle((int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY(),
+						(int)point.getX()+(corners*4)+(int)blocksize.getX(), (int)point.getY()+corners,
+						(int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+corners);
+				/* BOTTOM CORNERS */
+				g.fillTriangle((int)point.getX(),(int)point.getY()+(int)blocksize.getY(),
+						(int)point.getX()+corners, (int)point.getY()+corners+(int)blocksize.getY(),
+						(int)point.getX()+corners, (int)point.getY()+(int)blocksize.getY());
+				g.fillTriangle((int)point.getX()+(corners*3)+(int)blocksize.getX(),(int)point.getY()+(int)blocksize.getY(),
+						(int)point.getX()+(corners*4)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY(),
+						(int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+corners+(int)blocksize.getY());
+				/* BODY */
+				g.fillRect((int)point.getX(), (int)point.getY()+corners, (corners*4)+(int)blocksize.getX(), (int)blocksize.getY()-corners);
+				/* TOP BORDERS */
+				g.fillRect((int)point.getX()+corners, (int)point.getY(), space, corners);
+				g.fillRect((int)point.getX()+space+jigsawspace+(corners*2), (int)point.getY(), (int)blocksize.getX()-space-jigsawspace+corners, corners);
+				/* BOTTOM BORDERS */
+				g.fillRect((int)point.getX()+corners, (int)point.getY()+(int)blocksize.getY(), (int)blocksize.getX()+(corners*2), corners);
+				
+				if (light) {
+					/* LIGHT */
+					g.setColor(ColorUtil.colorLerp(color, 0xffffff));
+					g.drawLine((int)point.getX(), (int)point.getY()+(int)blocksize.getY(),
+							(int)point.getX(), (int)point.getY()+corners);
+					g.drawLine((int)point.getX(), (int)point.getY()+corners,
+							(int)point.getX()+corners, (int)point.getY());
+					g.drawLine((int)point.getX()+corners, (int)point.getY(),
+							(int)point.getX()+corners+space-1, (int)point.getY());
+					g.drawLine((int)point.getX()+(corners*2)+space-1, (int)point.getY()+corners,
+							(int)point.getX()+corners+space+jigsawspace, (int)point.getY()+corners);
+					g.drawLine((int)point.getX()+corners+space+jigsawspace+1, (int)point.getY()+corners-1,
+							(int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY());
+					g.drawLine((int)point.getX()+(corners*2)+space+jigsawspace, (int)point.getY(),
+							(int)point.getX()+(corners*3)+(int)blocksize.getX()-1, (int)point.getY());
+					/* SHADOW */
+					g.setColor(ColorUtil.colorLerp(color, ColorUtil.colorLerp(color, 0)));
+					g.drawLine((int)point.getX()+corners, (int)point.getY()+(int)blocksize.getY()+corners-1,
 							(int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1);
 					g.drawLine((int)point.getX()+(corners*3)+(int)blocksize.getX(), (int)point.getY()+(int)blocksize.getY()+corners-1,
 							(int)point.getX()+(corners*4)+(int)blocksize.getX()-1, (int)point.getY()+(int)blocksize.getY());
@@ -338,6 +395,14 @@ public class BlockRenderer {
 			}
 			break;
 		}
+		case 6: {
+			renderblock(3, new BlockArg[] {
+				    new BlockArg(0, new Object[]{"when"}),
+				    new BlockArg(7, new Object[]{null}),
+				    new BlockArg(0, new Object[]{"clicked"})
+				}, new Point(point.getX()+(corners*2), point.getY()+corners), 0xD3A230, loadedImages, g);
+			break;
+		}
 		case 7: {
 			g.drawImage(loadedImages[1], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
@@ -354,7 +419,17 @@ public class BlockRenderer {
 			g.drawImage(loadedImages[4], (int)point.getX()+(corners*2), (int)point.getY()+corners, 0);
 			break;
 		}
+		case 12: {
+			g.setColor(Integer.parseInt((String) argset));
+			g.fillRect((int)point.getX()+(corners*2), (int)point.getY()+corners, (int)(12*size), (int)(12*size));
+			g.setColor(0);
+			g.drawRect((int)point.getX()+(corners*2), (int)point.getY()+corners, (int)(12*size), (int)(12*size));
 		}
-		System.out.println("successfully rendered argument (value display): " + (String) argset);
+		}
+		try {
+			System.out.println("successfully rendered argument (value display): " + (String) argset);
+		} catch (ClassCastException e) {
+			System.out.println("successfully rendered argument (value display): (an error occured due to ClassCastException)");
+		}
 	}
 }

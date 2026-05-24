@@ -16,6 +16,7 @@ public class BlockArg {
 	 * type 9 - clockwise
 	 * type 10 - counter clockwise
 	 * type 11 - c-block sub-block
+	 * type 12 - color input
 	 */
 	
 	private int type;
@@ -38,6 +39,12 @@ public class BlockArg {
 	public static int getWidth(BlockArg blockarg, float size) {
 		Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
 		Font boldFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+		int size1 = 16;
+		if (font.getHeight() >= 24) {
+			size1 = 24;
+		} else if (font.getHeight() >= 32) {
+			size1 = 32;
+		}
 		switch (blockarg.getType()) {
 		case 0: {
 			return boldFont.stringWidth((String)blockarg.getObjectArray()[0]);
@@ -57,11 +64,18 @@ public class BlockArg {
 		case 4: {
 			return (int)(20*size);
 		}
+		case 6: {
+			return 8;
+		}
 		case 7: 
 		case 8:
 		case 9:
-		case 10:
-			return 16;
+		case 10: {
+			return size1;
+		}
+		case 12: {
+			return (int)(12*size);
+		}
 		}
 		return 0;
 	}
