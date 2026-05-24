@@ -1,14 +1,17 @@
 package com.tsg.scratchjava.blocks;
 
 import java.io.IOException;
+import java.util.Hashtable;
 
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-import com.tsg.scratchjava.sys.Block;
+import com.tsg.scratchjava.acs.Block;
+import com.tsg.scratchjava.acs.BlockSpecs;
 import com.tsg.scratchjava.sys.ColorUtil;
 import com.tsg.scratchjava.sys.Point;
+import com.tsg.scratchjava.sys.Sys;
 
 
 public class BlockRenderer {
@@ -20,6 +23,27 @@ public class BlockRenderer {
 	private static int corners = (int) (3f*size);
 	private static boolean light = true;
 	private static int colorset = 0;
+	static Hashtable cache = new Hashtable();
+	public static void renderblock(Block block, Image[] loadedImages, Graphics g) {
+		System.out.println("rendering block");
+		String key = "bs_" + BlockSpecs.getIdxFrom(block.getIN(), Sys.motion);
+		BlockSpecs output;
+		if (cache.get(key) != null) {
+			output = (BlockSpecs) cache.get(key);
+		} else {
+			output = Sys.motion[BlockSpecs.getIdxFrom(block.getIN(), Sys.motion)];
+		}
+		System.out.println(block.getIN());
+		System.out.println(BlockSpecs.getIdxFrom(block.getIN(), Sys.motion));
+		System.out.println(Sys.motion[1].getIN());
+		renderblock(output.getType(),
+				output.getBAs(),
+				new Point(0,0),
+				output.getColor(),
+				loadedImages,
+				g);
+		cache.put(key, Sys.motion[BlockSpecs.getIdxFrom(block.getIN(), Sys.motion)]);
+	}
 	public static void renderblock(int type, BlockArg[] blockArgs, Point point, int color, Image[] loadedImages, Graphics g) {
 		Point blocksize = new Point(getWidth(blockArgs)-corners, font.getHeight());
 		colorset = color;
@@ -299,7 +323,12 @@ public class BlockRenderer {
 			renderblockarg(new Point(point.getX()+width, point.getY()), blockArgs[i], loadedImages, g);
 			switch (blockArgs[i].getType()) {
 			case 6: {
-				width += Block.getWidth(blockArgs, corners, font);
+				if (blockArgs[i].getObjectArray()[0] != null) {
+					width += Block.getWidth(blockArgs, corners, font);
+				} else {
+					//System.out.println(BlockArg.getWidth(blockArgs[i], size) + corners);
+					width += BlockArg.getWidth(blockArgs[i], size) + corners;
+				}
 				break;
 			}
 			default: {
@@ -321,7 +350,12 @@ public class BlockRenderer {
 		for (int i = 0; i < blockArgs.length; i++) {
 			switch (blockArgs[i].getType()) {
 			case 6: {
-				width += Block.getWidth(blockArgs1, corners, font);
+				if (blockArgs[i].getObjectArray()[0] != null) {
+					width += Block.getWidth(blockArgs, corners, font);
+				} else {
+					//System.out.println(BlockArg.getWidth(blockArgs[i], size) + corners);
+					width += BlockArg.getWidth(blockArgs[i], size) + corners;
+				}
 				break;
 			}
 			default: {

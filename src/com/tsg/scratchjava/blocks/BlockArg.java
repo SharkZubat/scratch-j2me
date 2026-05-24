@@ -2,7 +2,7 @@ package com.tsg.scratchjava.blocks;
 
 import javax.microedition.lcdui.Font;
 
-import com.tsg.scratchjava.sys.Block;
+import com.tsg.scratchjava.acs.Block;
 
 public class BlockArg {
 	/*
@@ -71,9 +71,12 @@ public class BlockArg {
 			return (int)(20*size);
 		}
 		case 6: {
+			System.out.println("figuring out");
 			if (blockarg.getObjectArray()[0]!=null) {
+				System.out.println("returning to 2");
 				return 2;
 			}
+			System.out.println("returning to 12 multiplied with size");
 			return (int)(12*size);
 		}
 		case 7: 

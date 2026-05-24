@@ -1,17 +1,18 @@
-package com.tsg.scratchjava.sys;
+package com.tsg.scratchjava.acs;
 
 import javax.microedition.lcdui.Font;
 
 import com.tsg.scratchjava.blocks.BlockArg;
 import com.tsg.scratchjava.blocks.BlockRenderer;
+import com.tsg.scratchjava.sys.Point;
 
 public class Block {
-	private static String internalName = "moveSteps";
+	private static String internalName = "forward:";
 	public Block(String string, Point point) {
 		 internalName = string;
 	}
 	
-	public static String getIN() {
+	public String getIN() {
 		return internalName;
 	}
 	
