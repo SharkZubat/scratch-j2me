@@ -6,6 +6,7 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
+import com.tsg.scratchjava.sys.Block;
 import com.tsg.scratchjava.sys.ColorUtil;
 import com.tsg.scratchjava.sys.Point;
 
@@ -296,15 +297,38 @@ public class BlockRenderer {
 		int width = 0;
 		for (int i = 0; i < blockArgs.length; i++) {
 			renderblockarg(new Point(point.getX()+width, point.getY()), blockArgs[i], loadedImages, g);
-			width += BlockArg.getWidth(blockArgs[i], size) + corners;
+			switch (blockArgs[i].getType()) {
+			case 6: {
+				width += Block.getWidth(blockArgs, corners, font);
+				break;
+			}
+			default: {
+				width += BlockArg.getWidth(blockArgs[i], size) + corners;
+				break;
+			}
+			}
 		}
 	}
 	
-	private static int getWidth(BlockArg[] blockArgs) {
+	public static int getWidth(BlockArg[] blockArgs) {
 		// TODO Auto-generated method stub
 		int width = 0;
+		BlockArg[] blockArgs1 = new BlockArg[] {
+			    new BlockArg(0, new Object[]{"when"}),
+			    new BlockArg(7, new Object[]{null}),
+			    new BlockArg(0, new Object[]{"clicked"})
+		};
 		for (int i = 0; i < blockArgs.length; i++) {
-			width += BlockArg.getWidth(blockArgs[i], size) + corners;
+			switch (blockArgs[i].getType()) {
+			case 6: {
+				width += Block.getWidth(blockArgs1, corners, font);
+				break;
+			}
+			default: {
+				width += BlockArg.getWidth(blockArgs[i], size) + corners;
+				break;
+			}
+			}
 		}
 		return width;
 	}
@@ -396,11 +420,16 @@ public class BlockRenderer {
 			break;
 		}
 		case 6: {
-			renderblock(3, new BlockArg[] {
+			if (argset!="") {
+				renderblock(3, new BlockArg[] {
 				    new BlockArg(0, new Object[]{"when"}),
 				    new BlockArg(7, new Object[]{null}),
 				    new BlockArg(0, new Object[]{"clicked"})
 				}, new Point(point.getX()+(corners*2), point.getY()+corners), 0xD3A230, loadedImages, g);
+			} else {
+				g.setColor(0);
+				g.drawRect((int)point.getX()+(corners*2), (int)point.getY()+corners, (int)(12*size), (int)(12*size));
+			}
 			break;
 		}
 		case 7: {

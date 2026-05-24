@@ -2,6 +2,8 @@ package com.tsg.scratchjava.blocks;
 
 import javax.microedition.lcdui.Font;
 
+import com.tsg.scratchjava.sys.Block;
+
 public class BlockArg {
 	/*
 	 * type 0 - text/label
@@ -36,6 +38,10 @@ public class BlockArg {
 		return objects;
 	}
 	
+	public void changeValue(int pos, Object input) {
+		
+	}
+	
 	public static int getWidth(BlockArg blockarg, float size) {
 		Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
 		Font boldFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
@@ -65,7 +71,10 @@ public class BlockArg {
 			return (int)(20*size);
 		}
 		case 6: {
-			return 8;
+			if (blockarg.getObjectArray()[0]!=null) {
+				return 2;
+			}
+			return (int)(12*size);
 		}
 		case 7: 
 		case 8:

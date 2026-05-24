@@ -93,7 +93,7 @@ public class Canvas extends GameCanvas implements Runnable {
 			    new BlockArg(0, new Object[]{"move"}),
 			    new BlockArg(1, new Object[]{"10"}),
 			    new BlockArg(0, new Object[]{"steps"}),
-			    new BlockArg(6, new Object[]{new Block("obsolete")})
+			    new BlockArg(6, new Object[]{new Block("obsolete", new Point(0,0))})
 			}, new Point(0, 20+(Math.min((font.getHeight()/15f), 2)*3)+font.getHeight()), 0x3061D3, loadedImages, g);
 		
 		flushGraphics();
