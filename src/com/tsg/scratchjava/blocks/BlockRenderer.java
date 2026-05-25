@@ -487,6 +487,20 @@ public class BlockRenderer {
 			g.fillRect((int)point.getX()+(corners*2), (int)point.getY()+corners, (int)(12*size), (int)(12*size));
 			g.setColor(0);
 			g.drawRect((int)point.getX()+(corners*2), (int)point.getY()+corners, (int)(12*size), (int)(12*size));
+			break;
+		}
+		case 13: {
+			g.setFont(font);
+			g.setColor(0xffffff);
+			g.fillRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), (int)Math.ceil(10*size)+font.stringWidth((String) argset), font.getHeight()-corners, (int)(10*size), (int)(10*size));
+			g.setColor(0xAAAAAA);
+			g.drawRoundRect((int)point.getX()+(corners*2), (int)point.getY()+(int)(corners*1.5f), (int)Math.ceil(10*size)+font.stringWidth((String) argset), font.getHeight()-corners-1, (int)(10*size), (int)(10*size));
+			g.setColor(0);
+			g.drawString((String) argset, (int)point.getX()+(corners*2)+2, (int)point.getY()+corners, 0);
+			g.fillTriangle((int)point.getX()+(corners*2)+(int)(2*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size),
+					(int)point.getX()+(corners*2)+(int)(5*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(8*size),
+					(int)point.getX()+(corners*2)+(int)(8*size)+font.stringWidth((String) argset), (int)point.getY()+(int)(corners*1.5f)+(int)(5*size));
+			break;
 		}
 		}
 		try {

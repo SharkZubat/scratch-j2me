@@ -71,7 +71,7 @@ public class Canvas extends GameCanvas implements Runnable {
 			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 0, 0);
 			g.drawString(Runtime.getRuntime().freeMemory() + "B", 0, Font.getDefaultFont().getHeight(), 0);}
 		
-		BlockRenderer.renderblock(new Block("tst:", new Point(0,0)), loadedImages, g);
+		BlockRenderer.renderblock(new Block("header:", new Point(0,0)), loadedImages, g);
 		
 		flushGraphics();
 	}

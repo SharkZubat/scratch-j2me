@@ -2,8 +2,6 @@ package com.tsg.scratchjava.blocks;
 
 import javax.microedition.lcdui.Font;
 
-import com.tsg.scratchjava.acs.Block;
-
 public class BlockArg {
 	/*
 	 * type 0 - text/label
@@ -19,6 +17,7 @@ public class BlockArg {
 	 * type 10 - counter clockwise
 	 * type 11 - c-block sub-block
 	 * type 12 - color input
+	 * type 13 - degree input
 	 */
 	
 	private int type;
@@ -60,6 +59,7 @@ public class BlockArg {
 			return font.stringWidth((String)blockarg.getObjectArray()[0])+(int)(4*size);
 		}
 		case 5:
+		case 13:
 		case 3: {
 			try {
 				return font.stringWidth((String)blockarg.getObjectArray()[0])+(int)(10*size);
