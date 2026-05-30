@@ -1,6 +1,5 @@
 package com.tsg.scratchjava.blocks;
 
-import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.microedition.lcdui.Font;
@@ -25,7 +24,6 @@ public class BlockRenderer {
 	private static int colorset = 0;
 	static Hashtable cache = new Hashtable();
 	public static void renderblock(Block block, Image[] loadedImages, Graphics g) {
-		System.out.println("rendering block");
 		String key = "bs_" + BlockSpecs.getIdxFrom(block.getIN(), Sys.motion);
 		BlockSpecs output;
 		if (cache.get(key) != null) {
@@ -33,15 +31,17 @@ public class BlockRenderer {
 		} else {
 			output = Sys.motion[BlockSpecs.getIdxFrom(block.getIN(), Sys.motion)];
 		}
-		System.out.println(block.getIN());
-		System.out.println(BlockSpecs.getIdxFrom(block.getIN(), Sys.motion));
-		System.out.println(Sys.motion[1].getIN());
 		renderblock(output.getType(),
 				output.getBAs(),
-				new Point(0,0),
+				block.point,
 				output.getColor(),
 				loadedImages,
 				g);
+		if (block.connectedWith != null) {
+			renderblock(new Block(block.connectedWith.getIN(),
+					new Point(block.point.getX(), block.point.getY()+font.getHeight()+corners),
+					block.connectedWith.connectedWith), loadedImages, g);
+		}
 		cache.put(key, Sys.motion[BlockSpecs.getIdxFrom(block.getIN(), Sys.motion)]);
 	}
 	public static void renderblock(int type, BlockArg[] blockArgs, Point point, int color, Image[] loadedImages, Graphics g) {
@@ -326,7 +326,6 @@ public class BlockRenderer {
 				if (blockArgs[i].getObjectArray()[0] != null) {
 					width += Block.getWidth(blockArgs, corners, font);
 				} else {
-					//System.out.println(BlockArg.getWidth(blockArgs[i], size) + corners);
 					width += BlockArg.getWidth(blockArgs[i], size) + corners;
 				}
 				break;
@@ -342,18 +341,12 @@ public class BlockRenderer {
 	public static int getWidth(BlockArg[] blockArgs) {
 		// TODO Auto-generated method stub
 		int width = 0;
-		BlockArg[] blockArgs1 = new BlockArg[] {
-			    new BlockArg(0, new Object[]{"when"}),
-			    new BlockArg(7, new Object[]{null}),
-			    new BlockArg(0, new Object[]{"clicked"})
-		};
 		for (int i = 0; i < blockArgs.length; i++) {
 			switch (blockArgs[i].getType()) {
 			case 6: {
 				if (blockArgs[i].getObjectArray()[0] != null) {
 					width += Block.getWidth(blockArgs, corners, font);
 				} else {
-					//System.out.println(BlockArg.getWidth(blockArgs[i], size) + corners);
 					width += BlockArg.getWidth(blockArgs[i], size) + corners;
 				}
 				break;

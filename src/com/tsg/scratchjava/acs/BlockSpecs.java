@@ -37,7 +37,6 @@ public class BlockSpecs {
 				System.out.println(bs[i].getIN() + "is" + iN + i);
 				return i;
 			} else {
-				System.out.println(bs[0].getIN() == bs[i].getIN());
 				System.out.println(bs[i].getIN() + "is not" + iN + i);
 			}
 		}

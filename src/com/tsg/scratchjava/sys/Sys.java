@@ -8,7 +8,7 @@ public class Sys {
 	public static String name = "Scratch J2ME";
 	public static String portbyuser = "thesharkguy";
 	public static String version = "v0.1";
-	public static String builds = "119";
+	public static String builds = "120";
 	public static boolean isProto = true;
 	
 	public static BlockSpecs[] motion = new BlockSpecs[]{
@@ -35,7 +35,7 @@ public class Sys {
 			}, 0x3061D3, "heading:"),
 		new BlockSpecs(0, new BlockArg[] {
 				new BlockArg(0, new Object[]{"point towards"}),
-				new BlockArg(3, new Object[]{null})
+				new BlockArg(3, new Object[]{null, "touchMenu"})
 			}, 0x3061D3, "pointTowards:")
 	};
 }

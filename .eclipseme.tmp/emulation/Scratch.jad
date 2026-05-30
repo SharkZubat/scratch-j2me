@@ -1,5 +1,7 @@
-MIDlet-1: Scratch,,com.tsg.scratchjava.Launcher
-MIDlet-Jar-Size: 24628
+MIDlet-1: Scratch,/res/img/icon.png,com.tsg.scratchjava.Launcher
+MIDlet-Heap-Size: 16384
+MIDlet-Icon: /res/img/icon.png
+MIDlet-Jar-Size: 34637
 MIDlet-Jar-URL: Scratch.jar
 MIDlet-Name: Scratch
 MIDlet-Vendor: thesharkguy

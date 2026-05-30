@@ -7,9 +7,13 @@ import com.tsg.scratchjava.blocks.BlockRenderer;
 import com.tsg.scratchjava.sys.Point;
 
 public class Block {
-	private static String internalName = "forward:";
-	public Block(String string, Point point) {
+	private String internalName = "forward:";
+	public Point point;
+	public Block connectedWith;
+	public Block(String string, Point point, Block connectedWith) {
 		 internalName = string;
+		 this.point = point;
+		 this.connectedWith = connectedWith;
 	}
 	
 	public String getIN() {

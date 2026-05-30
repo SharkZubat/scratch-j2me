@@ -1,9 +1,11 @@
-MIDlet-1: Scratch,,com.tsg.scratchjava.Launcher
+MIDlet-Heap-Size: 16384
+MIDlet-1: Scratch,/res/img/icon.png,com.tsg.scratchjava.Launcher
 MIDlet-Jar-URL: Scratch.jar
+MIDlet-Icon: /res/img/icon.png
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Version: 1.0.0
 MIDlet-Name: Scratch
 MIDlet-Vendor: thesharkguy
-MicroEdition-Profile: MIDP-2.0
 Nokia-MIDlet-App-Orientation: landspace
+MicroEdition-Profile: MIDP-2.0
 Nokia-MIDlet-On-Screen-Keypad: no

@@ -1,14 +1,18 @@
 package com.tsg.scratchjava;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Vector;
+
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 
 import com.tsg.scratchjava.acs.Block;
-import com.tsg.scratchjava.acs.BlockSpecs;
-import com.tsg.scratchjava.blocks.BlockArg;
+import com.tsg.scratchjava.acs.Sprite;
 import com.tsg.scratchjava.blocks.BlockRenderer;
+import com.tsg.scratchjava.sys.Array;
 import com.tsg.scratchjava.sys.Point;
 import com.tsg.scratchjava.sys.Sys;
 import com.tsg.scratchjava.sys.SysLoader;
@@ -20,6 +24,8 @@ public class Canvas extends GameCanvas implements Runnable {
 	private Point point = new Point(0,0);
 	Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
 	public Image[] loadedImages;
+	String bat = System.getProperty("com.nokia.mid.batterylevel");
+	Calendar calendar = Calendar.getInstance();
 
 	public Canvas() {
 		super(true);
@@ -39,13 +45,18 @@ public class Canvas extends GameCanvas implements Runnable {
 		point = new Point(x,y);
 		draw();
 	}
+	
+	protected void sizeChanged(int x, int y) {
+		draw();
+	}
 
 	public void run() {
 		// TODO Auto-generated method stub
 		while (isRunning) {
-	        if (Runtime.getRuntime().freeMemory()/1024 <= Runtime.getRuntime().totalMemory()/1024/2) {
-	        	//freeup();
+	        if (Runtime.getRuntime().freeMemory() <= Runtime.getRuntime().totalMemory()/2) {
+	        	freeup();
 	        }
+	        calendar.setTime(new Date(System.currentTimeMillis()));
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -66,13 +77,18 @@ public class Canvas extends GameCanvas implements Runnable {
 		g.setColor(0xd0d0d0);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
+		BlockRenderer.renderblock(new Block("pointTowards:", point, new Block("forward:", new Point(0,15), null)), loadedImages, g);
+
 		if (Sys.isProto) {
 			g.setColor(0);
-			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 0, 0);
-			g.drawString(Runtime.getRuntime().freeMemory() + "B", 0, Font.getDefaultFont().getHeight(), 0);}
-		
-		BlockRenderer.renderblock(new Block("header:", new Point(0,0)), loadedImages, g);
-		
+			g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 20, 0);
+			g.drawString(Runtime.getRuntime().freeMemory() + "B/" + Runtime.getRuntime().totalMemory() + "B", 0, Font.getDefaultFont().getHeight()+20, 0);}
+		try {
+			g.drawString(bat, 0, 0, 0);
+		} catch (NullPointerException e) {
+			g.drawString("?",0,0,0);
+		}
 		flushGraphics();
 	}
 }

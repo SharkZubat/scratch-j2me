@@ -2,9 +2,9 @@ package com.tsg.scratchjava.sys;
 
 public class Position {
 
-	private float x;
-	private float y;
-	private float d;
+	public float x;
+	public float y;
+	public float d;
 
 	public Position(float x, float y, float d) {
 		// TODO Auto-generated constructor stub
