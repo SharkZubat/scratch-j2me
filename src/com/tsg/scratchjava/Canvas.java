@@ -12,7 +12,8 @@ import javax.microedition.lcdui.game.GameCanvas;
 import com.tsg.scratchjava.acs.Block;
 import com.tsg.scratchjava.acs.Sprite;
 import com.tsg.scratchjava.blocks.BlockRenderer;
-import com.tsg.scratchjava.sys.Array;
+import com.tsg.scratchjava.iacs.Stage;
+import com.tsg.scratchjava.sys.ImageUtil;
 import com.tsg.scratchjava.sys.Point;
 import com.tsg.scratchjava.sys.Sys;
 import com.tsg.scratchjava.sys.SysLoader;
@@ -26,6 +27,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	public Image[] loadedImages;
 	String bat = System.getProperty("com.nokia.mid.batterylevel");
 	Calendar calendar = Calendar.getInstance();
+	public Stage stage = new Stage();
 
 	public Canvas() {
 		super(true);
@@ -53,10 +55,11 @@ public class Canvas extends GameCanvas implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		while (isRunning) {
-	        if (Runtime.getRuntime().freeMemory() <= Runtime.getRuntime().totalMemory()/2) {
+	        if (Runtime.getRuntime().freeMemory() <= Runtime.getRuntime().totalMemory()/5) {
 	        	freeup();
 	        }
 	        calendar.setTime(new Date(System.currentTimeMillis()));
+	        bat = System.getProperty("com.nokia.mid.batterylevel");
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -77,6 +80,8 @@ public class Canvas extends GameCanvas implements Runnable {
 		g.setColor(0xd0d0d0);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
+		stage.render();
+		g.drawImage(ImageUtil.scale(stage.view, getWidth(), (int)(360*(getWidth()/480f))), 0, 0, 0);
 		BlockRenderer.renderblock(new Block("pointTowards:", point, new Block("forward:", new Point(0,15), null)), loadedImages, g);
 
 		if (Sys.isProto) {
@@ -84,10 +89,12 @@ public class Canvas extends GameCanvas implements Runnable {
 			g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 20, 0);
 			g.drawString(Runtime.getRuntime().freeMemory() + "B/" + Runtime.getRuntime().totalMemory() + "B", 0, Font.getDefaultFont().getHeight()+20, 0);}
-		try {
-			g.drawString(bat, 0, 0, 0);
-		} catch (NullPointerException e) {
-			g.drawString("?",0,0,0);
+		g.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+		g.drawString(calendar.get(Calendar.HOUR)+":"+((calendar.get(Calendar.MINUTE) < 10) ? "0" + calendar.get(Calendar.MINUTE) : String.valueOf(calendar.get(Calendar.MINUTE))), 0, 0, 0);
+		if (bat != null) {
+			g.drawString(bat+"%", getWidth()-g.getFont().stringWidth(bat+"%"), 0, 0);
+		} else {
+			g.drawString("?%",getWidth()-g.getFont().stringWidth("?%"),0,0);
 		}
 		flushGraphics();
 	}
