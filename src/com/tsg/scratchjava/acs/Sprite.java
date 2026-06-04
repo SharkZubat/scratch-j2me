@@ -53,6 +53,6 @@ public class Sprite {
 
 	public Image getImage() {
 		// TODO Auto-generated method stub
-		return ImageUtil.rotateImage(((Costume) costumes.elementAt(currcostume)).getImage(), pos.d);
+		return ImageUtil.rotateImage(((Costume) costumes.elementAt(currcostume)).getImage(), 90-pos.d);
 	}
 }

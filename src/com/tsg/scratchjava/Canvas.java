@@ -61,7 +61,8 @@ public class Canvas extends GameCanvas implements Runnable {
 	        if (Runtime.getRuntime().freeMemory() <= Runtime.getRuntime().totalMemory()/5) {
 	        	freeup();
 	        }
-	        runtime.run("forward:", new Object[]{"0.1"}, 0, true);
+	        runtime.run("forward:", new Object[]{"1"}, 0, true);
+	        runtime.run("turnRight:", new Object[]{"0.4"}, 0, true);
 	        calendar.setTime(new Date(System.currentTimeMillis()));
 	        bat = System.getProperty("com.nokia.mid.batterylevel");
 			try {
@@ -93,7 +94,7 @@ public class Canvas extends GameCanvas implements Runnable {
 		if (Sys.isProto) {
 			g.setColor(0);
 			g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
-			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 20, 0);
+			g.drawString("Scratch j2me proto " + Sys.version, 0, 20, 0);
 			g.drawString(Runtime.getRuntime().freeMemory() + "B/" + Runtime.getRuntime().totalMemory() + "B", 0, Font.getDefaultFont().getHeight()+20, 0);}
 		SysGUI.rendertopbar(g, calendar, bat, getWidth());
 		flushGraphics();

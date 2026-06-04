@@ -17,8 +17,15 @@ public class SysRuntime {
 	public void run(String blockName, Object[] args, int spriteIndex, boolean runWithoutRefresh) {
 		if (blockName == "forward:") {
 			((Sprite) stage.sprites.elementAt(spriteIndex)).pos.changePos(Float.valueOf((String)args[0]).floatValue()*(float)AdvMath.sin(((Sprite) stage.sprites.elementAt(spriteIndex)).pos.d), Float.valueOf((String)args[0]).floatValue()*(float)AdvMath.cos(((Sprite) stage.sprites.elementAt(spriteIndex)).pos.d), 0f);
-			if (!runWithoutRefresh)
-			stage.render(null);
 		}
+		if (blockName == "turnRight:") {
+			((Sprite) stage.sprites.elementAt(spriteIndex)).pos.changePos(0f, 0f, Float.valueOf((String)args[0]).floatValue());
+		}
+		if (blockName == "turnLeft:") {
+			((Sprite) stage.sprites.elementAt(spriteIndex)).pos.changePos(0f, 0f, -Float.valueOf((String)args[0]).floatValue());
+		}
+		//
+		if (!runWithoutRefresh)
+			stage.render(null);
 	}
 }

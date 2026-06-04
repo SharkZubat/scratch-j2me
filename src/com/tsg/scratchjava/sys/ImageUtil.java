@@ -46,12 +46,12 @@ public class ImageUtil {
 	  }//resize image
 	  
 	    public static Image rotateImage(Image image, float angle) {
-	    	String key = image.hashCode() + "D_" + angle;
+	    	String key = image.hashCode() + "D_" + Math.floor(angle*2)/2;
 	    	if (cache.get(key) != null) {
 	    		return (Image)cache.get(key);
 	    	}
 	    	//radians and sin, cos
-	    	double radians = Math.toRadians(angle);
+	    	double radians = Math.toRadians(Math.floor(angle*2)/2);
 	    	float sin = (float) Math.sin(radians);
 	    	float cos = (float) Math.cos(radians);
 	    	//datas
