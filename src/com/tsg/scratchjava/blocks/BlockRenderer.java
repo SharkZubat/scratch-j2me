@@ -496,10 +496,10 @@ public class BlockRenderer {
 			break;
 		}
 		}
-		try {
-			System.out.println("successfully rendered argument (value display): " + (String) argset);
-		} catch (ClassCastException e) {
-			System.out.println("successfully rendered argument (value display): (an error occured due to ClassCastException)");
-		}
+//		try {
+//			System.out.println("successfully rendered argument (value display): " + (String) argset);
+//		} catch (ClassCastException e) {
+//			System.out.println("successfully rendered argument (value display): (an error occured due to ClassCastException)");
+//		}
 	}
 }

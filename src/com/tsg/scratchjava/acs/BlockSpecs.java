@@ -34,10 +34,7 @@ public class BlockSpecs {
 	public static int getIdxFrom(String iN, BlockSpecs[] bs) {
 		for (int i=0; i < bs.length; i++) {
 			if (bs[i].getIN() == iN) {
-				System.out.println(bs[i].getIN() + "is" + iN + i);
 				return i;
-			} else {
-				System.out.println(bs[i].getIN() + "is not" + iN + i);
 			}
 		}
 		return -1;

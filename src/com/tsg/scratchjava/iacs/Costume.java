@@ -15,7 +15,7 @@ public class Costume {
 		name = string;
 		image = createImage;
 	}
-
+	
 	public static Costume load(String string) {
 		// TODO Auto-generated method stub
 		try {

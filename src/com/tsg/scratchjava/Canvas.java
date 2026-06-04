@@ -16,7 +16,9 @@ import com.tsg.scratchjava.iacs.Stage;
 import com.tsg.scratchjava.sys.ImageUtil;
 import com.tsg.scratchjava.sys.Point;
 import com.tsg.scratchjava.sys.Sys;
+import com.tsg.scratchjava.sys.SysGUI;
 import com.tsg.scratchjava.sys.SysLoader;
+import com.tsg.scratchjava.sys.SysRuntime;
 
 public class Canvas extends GameCanvas implements Runnable {
 
@@ -27,7 +29,8 @@ public class Canvas extends GameCanvas implements Runnable {
 	public Image[] loadedImages;
 	String bat = System.getProperty("com.nokia.mid.batterylevel");
 	Calendar calendar = Calendar.getInstance();
-	public Stage stage = new Stage();
+	public SysRuntime runtime = new SysRuntime();
+	public SysGUI gui = new SysGUI();
 
 	public Canvas() {
 		super(true);
@@ -58,10 +61,11 @@ public class Canvas extends GameCanvas implements Runnable {
 	        if (Runtime.getRuntime().freeMemory() <= Runtime.getRuntime().totalMemory()/5) {
 	        	freeup();
 	        }
+	        runtime.run("forward:", new Object[]{"0.1"}, 0, true);
 	        calendar.setTime(new Date(System.currentTimeMillis()));
 	        bat = System.getProperty("com.nokia.mid.batterylevel");
 			try {
-				Thread.sleep(1);
+				Thread.sleep(33);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,7 +75,7 @@ public class Canvas extends GameCanvas implements Runnable {
 	
 	private void freeup() {
 		// TODO Auto-generated method stub
-		System.gc();
+//		System.gc();
 	}
 
 	private void draw() {
@@ -80,8 +84,10 @@ public class Canvas extends GameCanvas implements Runnable {
 		g.setColor(0xd0d0d0);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
-		stage.render();
-		g.drawImage(ImageUtil.scale(stage.view, getWidth(), (int)(360*(getWidth()/480f))), 0, 0, 0);
+		Point point1 = (getWidth() < getHeight()) ? new Point(getWidth(), (360*(getWidth()/480f))) : new Point((480*(getHeight()/360f)), getHeight());
+		runtime.stage.render(point1);
+		g.drawImage(runtime.stage.view, 0, 0, 0);
+		//g.drawImage(runtime.stage.view, 0, 0, 0);
 		BlockRenderer.renderblock(new Block("pointTowards:", point, new Block("forward:", new Point(0,15), null)), loadedImages, g);
 
 		if (Sys.isProto) {
@@ -89,13 +95,7 @@ public class Canvas extends GameCanvas implements Runnable {
 			g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 			g.drawString("Scratch j2me proto " + Sys.version + " " + Sys.builds, 0, 20, 0);
 			g.drawString(Runtime.getRuntime().freeMemory() + "B/" + Runtime.getRuntime().totalMemory() + "B", 0, Font.getDefaultFont().getHeight()+20, 0);}
-		g.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
-		g.drawString(calendar.get(Calendar.HOUR)+":"+((calendar.get(Calendar.MINUTE) < 10) ? "0" + calendar.get(Calendar.MINUTE) : String.valueOf(calendar.get(Calendar.MINUTE))), 0, 0, 0);
-		if (bat != null) {
-			g.drawString(bat+"%", getWidth()-g.getFont().stringWidth(bat+"%"), 0, 0);
-		} else {
-			g.drawString("?%",getWidth()-g.getFont().stringWidth("?%"),0,0);
-		}
+		SysGUI.rendertopbar(g, calendar, bat, getWidth());
 		flushGraphics();
 	}
 }
